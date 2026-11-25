@@ -8,10 +8,17 @@ const apiURL = 'https://api.lyrics.ovh';
 
 // Search by song or artist
 async function searchSongs(term) {
-    const res = await fetch(`${apiURL}/suggest${term}`);
-    const data = await res.json();
+    try {
+        const res = await fetch(`${apiURL}/suggest/${encodeURIComponent(term)}`);
+        const data = await res.json();
 
-    console.log(showData);
+        console.log(data);
+
+        showDataSafe(data);
+
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 // Event listeners
